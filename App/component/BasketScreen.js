@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 const Logo = require("../assets/Logo.png");
 const Menu = require("../assets/Menu.png");
@@ -29,16 +29,16 @@ const BasketScreen = () => {
       </View>
       <View>
         <View style={styles.images1}>
-          <Text>LAMEREI</Text>
+          <Text style={styles.txt8}>L A M E R E I</Text>
           <Image source={Export} style={styles.images7} />
         </View>
-        <Text>Recycle Boucle Knit Cardigan Pink </Text>
+        <Text style={styles.txt9}>Recycle Boucle Knit Cardigan Pink </Text>
 
-        <Text>Price: $120</Text>
+        <Text style={styles.txt10}>$120</Text>
       </View>
-      <View>
-        <Text>MATERIALS</Text>
-        <Text>
+      <View style={styles.mate}>
+        <Text style={styles.txt11}>M A T E R I A L S</Text>
+        <Text style={styles.txt12}>
           We work with monitoring programmes to ensure compliance with safety,
           health and quality standards for our products.
         </Text>
@@ -68,6 +68,15 @@ const BasketScreen = () => {
         <Text style={styles.txt7}>09/11/2021 - 12/11/2021</Text>
         <Image source={Up} style={styles.images6} />
       </View>
+      <TouchableOpacity
+        onPress={() => alert("Are you sure you want to add to basket? ")}
+      >
+        <View style={styles.footer1}>
+          <Image source={Plus} style={styles.foot1} />
+          <Image source={Heart} style={styles.foot} />
+          <Text style={styles.check}>ADD TO BASKET</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -81,6 +90,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 40,
+    paddingBottom: 300,
   },
   headerimg: {
     flexDirection: "row",
@@ -129,55 +139,129 @@ const styles = StyleSheet.create({
     tintColor: "grey",
   },
   images5: {
-    left: 100,
-    top: 20,
+    left: 120,
+    top: 10,
   },
   images6: {
-    right: 120,
+    right: 100,
     top: 20,
 
     tintColor: "grey",
   },
+  images7: {
+    left: 150,
+  },
   txt: {
     right: 70,
     color: "grey",
+    fontFamily: "didot",
   },
   txt3: {
     right: 20,
     color: "grey",
+    fontFamily: "didot",
   },
   txt4: {
     right: 15,
     color: "grey",
+    fontFamily: "didot",
   },
   txt5: {
-    left: 110,
-    marginTop: 10,
-    marginBottom: 10,
+    left: 130,
+
+    marginBottom: 15,
     top: 10,
+    fontSize: 16,
+    fontFamily: "didot",
   },
   txt6: {
     top: 30,
-    right: 33,
+    right: 40,
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 15,
     color: "grey",
+    fontFamily: "didot",
   },
   txt7: {
     top: 50,
-    right: 210,
+    right: 220,
     color: "grey",
-    marginTop: 10,
+    marginTop: 15,
     marginBottom: 10,
+    fontFamily: "didot",
+  },
+  txt8: {
+    right: 40,
+    fontSize: 18,
+    fontFamily: "didot",
+  },
+  txt9: {
+    right: 40,
+    color: "grey",
+    fontSize: 16,
+    fontFamily: "didot",
+  },
+  txt10: {
+    right: 40,
+    color: "brown",
+    fontSize: 18,
+    top: 10,
+    fontFamily: "didot",
+  },
+  txt11: {
+    left: 15,
+    fontSize: 18,
+    fontFamily: "didot",
+  },
+  txt12: {
+    left: 15,
+    fontSize: 15,
+    color: "grey",
+    lineHeight: 25,
+    fontFamily: "didot",
   },
 
   rule: {
     height: 1,
-    borderBottomColor: "background: rgba(175, 176, 182, 1)",
+    borderBottomColor: "rgb(224, 224, 224)",
     marginTop: 10,
     marginBottom: 10,
     borderBottomWidth: 1,
-    width: 200,
-    right: 50,
+    width: 320,
+    right: 4,
+  },
+  mate: {
+    paddingTop: 30,
+
+    width: 300,
+    height: 150,
+    right: 30,
+  },
+  footer1: {
+    paddingBottom: 40,
+    backgroundColor: "black",
+    height: 70,
+    width: 370,
+
+    marginBottom: 1,
+    flexDirection: "row",
+    top: 300,
+    right: 10,
+  },
+  check: {
+    fontFamily: "didot",
+    color: "white",
+    left: 20,
+    top: 20,
+  },
+  foot: {
+    tintColor: "white",
+    left: 250,
+    top: 20,
+  },
+  foot1: {
+    tintColor: "white",
+    left: 30,
+    top: 26,
   },
 });

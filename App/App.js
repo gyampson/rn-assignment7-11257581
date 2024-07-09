@@ -38,7 +38,7 @@ export default function App() {
       <ScrollView>
         <BasketScreen />
 
-        <View style={styles.footer}>
+        {/* <View style={styles.footer}>
           <Text style={styles.txt1}>E S T . TOTAL</Text>
           <Text style={styles.txt2}>$240</Text>
         </View>
@@ -49,7 +49,7 @@ export default function App() {
             <Image source={shoppingBag} style={styles.img} />
             <Text style={styles.check}>C H E C K O U T</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </ScrollView>
     </NavigationContainer>
   );
