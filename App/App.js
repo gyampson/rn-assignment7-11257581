@@ -10,33 +10,34 @@ import {
 import "react-native-gesture-handler";
 import { FontDisplay, useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import HomeScreen from "./component/HomeScreen";
 import CartScreen from "./component/CartScreen";
-const Drawer = createDrawerNavigator();
+import HomeScreen2 from "./component/HomeScreen2";
+import BasketScreen from "./component/BasketScreen";
+
 const Logo = require("./assets/Logo.png");
 const Menu = require("./assets/Menu.png");
 const shoppingBag = require("./assets/shoppingBag.png");
 const Search = require("./assets/Search.png");
-SplashScreen.preventAutoHideAsync();
-function MyDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Open Fashion" component={HomeScreen} />
+const didotFont = require("./assets/didot.ttf");
 
-      <Drawer.Screen name="Check Out" component={CartScreen} />
-    </Drawer.Navigator>
-  );
-}
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    didot: require("./assets/didot.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <Text>Loading...</Text>;
+  }
   return (
     <NavigationContainer style={styles.container}>
       <ScrollView>
-        <HomeScreen />
-        <CartScreen />
+        <BasketScreen />
+
         <View style={styles.footer}>
           <Text style={styles.txt1}>E S T . TOTAL</Text>
           <Text style={styles.txt2}>$240</Text>

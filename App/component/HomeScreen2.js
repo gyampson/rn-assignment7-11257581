@@ -30,6 +30,15 @@ const Logo = require("../assets/Logo.png");
 const didot = require("../assets/didot.ttf");
 const Search = require("../assets/Search.png");
 import * as Font from "expo-font";
+function MyDrawer() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Open Fashion" component={HomeScreen} />
+
+      <Drawer.Screen name="Check Out" component={CartScreen} />
+    </Drawer.Navigator>
+  );
+}
 
 const HomeScreen = () => {
   return (

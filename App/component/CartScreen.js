@@ -6,18 +6,20 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  fontFamily,
 } from "react-native";
 import React from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
-SplashScreen.preventAutoHideAsync();
+import { useEffect, useState } from "react";
+
 const remove = require("../assets/remove.png");
 const dress1 = require("../assets/dress1.png");
 const dress4 = require("../assets/dress4.png");
 const dress3 = require("../assets/dress3.png");
 const Logo = require("../assets/Logo.png");
 const Search = require("../assets/Search.png");
+const didotFont = require("../assets/didot.ttf");
 const CartScreen = () => {
   return (
     <View style={styles.container}>
