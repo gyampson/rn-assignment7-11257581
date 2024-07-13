@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
-const Logo = require("../assets/Logo.png");
-const Menu = require("../assets/Menu.png");
-const shoppingBag = require("../assets/shoppingBag.png");
-const Search = require("../assets/Search.png");
-const dress4 = require("../assets/dress4.png");
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 const tumble = require("../assets/tumble.png");
 const wash = require("../assets/wash.png");
 const door = require("../assets/door.png");
@@ -15,27 +17,37 @@ const Shipping = require("../assets/Shipping.png");
 const Plus = require("../assets/Plus.png");
 const Heart = require("../assets/Heart.png");
 const Export = require("../assets/Export.png");
-const BasketScreen = () => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.headerimg}>
-        <Image source={Search} style={styles.headerimg1} />
-        <Image source={shoppingBag} style={styles.headerimg2} />
-        <Image source={Menu} style={styles.headerimg3} />
-        <Image source={Logo} style={styles.headerimg4} />
-      </View>
-      <View style={styles.image}>
-        <Image source={dress4} style={styles.img} />
-      </View>
-      <View>
-        <View style={styles.images1}>
-          <Text style={styles.txt8}>L A M E R E I</Text>
-          <Image source={Export} style={styles.images7} />
-        </View>
-        <Text style={styles.txt9}>Recycle Boucle Knit Cardigan Pink </Text>
+const Clothing = ({ route, navigation }) => {
+  const { product, addToCart } = route.params;
 
-        <Text style={styles.txt10}>$120</Text>
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={require("../assets/Menu.png")} style={styles.icon} />
+        </TouchableOpacity>
+        <Image source={require("../assets/Logo.png")} style={styles.logo} />
+        <View style={styles.headerIcons}>
+          <TouchableOpacity>
+            <Image
+              source={require("../assets/Search.png")}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Clothing")}>
+            <Image
+              source={require("../assets/shoppingBag.png")}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
+      <Image source={{ uri: product.image }} style={styles.productImage} />
+      <View style={styles.productInfo}>
+        <Text style={styles.productTitle}>{product.title}</Text>
+        <Text style={styles.productPrice}>${product.price}</Text>
+      </View>
+
       <View style={styles.mate}>
         <Text style={styles.txt11}>M A T E R I A L S</Text>
         <Text style={styles.txt12}>
@@ -51,16 +63,16 @@ const BasketScreen = () => {
         <Image source={tumble} style={styles.images2} />
         <Text style={styles.txt}>Do not tumble dry</Text>
       </View>
-      <View style={styles.images1}>
+      <View style={styles.images11}>
         <Image source={wash} style={styles.images3} />
         <Text style={styles.txt3}>Dry clean with tetrachloroethylene</Text>
       </View>
-      <View style={styles.images1}>
+      <View style={styles.images21}>
         <Image source={iron} style={styles.images4} />
         <Text style={styles.txt4}> Iron at a maximum of 110ºC/230ºF</Text>
       </View>
       <View style={styles.rule}></View>
-      <View style={styles.images1}>
+      <View style={styles.images0}>
         <Image source={Shipping} style={styles.images5} />
 
         <Text style={styles.txt5}>Free Flat Rate Shipping</Text>
@@ -68,60 +80,84 @@ const BasketScreen = () => {
         <Text style={styles.txt7}>09/11/2021 - 12/11/2021</Text>
         <Image source={Up} style={styles.images6} />
       </View>
-      <TouchableOpacity
-        onPress={() => alert("Are you sure you want to add to basket? ")}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate("Store")}>
         <View style={styles.footer1}>
           <Image source={Plus} style={styles.foot1} />
           <Image source={Heart} style={styles.foot} />
           <Text style={styles.check}>ADD TO BASKET</Text>
         </View>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
-
-export default BasketScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 40,
-    paddingBottom: 300,
+    padding: 10,
   },
-  headerimg: {
+
+  headerIcons: {
     flexDirection: "row",
   },
-  headerimg1: {
-    left: 170,
-  },
-  headerimg2: {
-    left: 190,
-  },
-  headerimg3: {
-    right: 140,
-  },
-  headerimg4: {
-    right: 30,
-  },
-  image: {},
-  img: {
-    width: 450,
-    height: 450,
+
+  productImage: {
+    width: "90%",
+    height: 300,
     resizeMode: "contain",
-    marginTop: 20,
-    marginBottom: 20,
+    left: "5%",
   },
-  images: {
+  productInfo: {
+    padding: 20,
+
+    fontWeight: "condensed",
+  },
+  productTitle: {
+    fontSize: 24,
+    fontWeight: "condensed",
+    fontFamily: "didot",
+    marginBottom: 10,
+  },
+  productPrice: {
+    fontSize: 24,
+    color: "#e60000",
+    marginBottom: 20,
+    fontFamily: "didot",
+  },
+  images0: {
     flexDirection: "row",
-    left: 20,
+    justifyContent: "space-between",
+    padding: 20,
+
+    paddingBottom: 300,
+
+    right: 120,
+    top: 10,
+    borderRadius: 10,
   },
   images1: {
     flexDirection: "row",
 
+    marginTop: 10,
+    marginBottom: 10,
+    left: 110,
+  },
+  images11: {
+    left: 60,
+    flexDirection: "row",
+
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  images21: {
+    left: 50,
+    flexDirection: "row",
     marginTop: 10,
     marginBottom: 10,
   },
@@ -231,21 +267,17 @@ const styles = StyleSheet.create({
     right: 4,
   },
   mate: {
-    paddingTop: 30,
-
     width: 300,
     height: 150,
-    right: 30,
   },
   footer1: {
-    paddingBottom: 40,
     backgroundColor: "black",
     height: 70,
     width: 370,
 
     marginBottom: 1,
     flexDirection: "row",
-    top: 300,
+
     right: 10,
   },
   check: {
@@ -265,3 +297,5 @@ const styles = StyleSheet.create({
     top: 26,
   },
 });
+
+export default Clothing;

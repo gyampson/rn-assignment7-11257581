@@ -1,31 +1,16 @@
+import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
-  Text,
   View,
-  Image,
-  ScrollView,
-  Button,
-  TouchableOpacity,
+  Text,
   FlatList,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  Button,
 } from "react-native";
-import React from "react";
-import { useFonts } from "expo-font";
-
-import { useEffect, useState } from "react";
-
-const Menu = require("../assets/Menu.png");
-const remove = require("../assets/remove.png");
-const add_circle = require("../assets/add_circle.png");
-const Filter = require("../assets/Filter.png");
-const Listview = require("../assets/Listview.png");
-const shoppingBag = require("../assets/shoppingBag.png");
-const Logo = require("../assets/Logo.png");
-
-const didot = require("../assets/didot.ttf");
-const Search = require("../assets/Search.png");
-import * as Font from "expo-font";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const HomeScreen = ({ navigation }) => {
+const shoppingBag = require("../assets/shoppingBag.png");
+const Blog = ({ navigation }) => {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
 
@@ -59,21 +44,28 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerimg}>
-        <Image source={Search} style={styles.headerimg1} />
-        <Image source={shoppingBag} style={styles.headerimg2} />
-        <Image source={Menu} style={styles.headerimg3} />
-        <Image source={Logo} style={styles.headerimg4} />
-      </View>
       <View style={styles.header}>
-        <Text style={[styles.font, { fontWeight: "thin" }]}>OUR STORY</Text>
-        <View style={styles.img0}>
-          <Image source={Listview} style={styles.img1} />
-        </View>
-        <View style={styles.img}>
-          <Image source={Filter} style={styles.img2} />
+        <TouchableOpacity>
+          <Image source={require("../assets/Menu.png")} style={styles.icon} />
+        </TouchableOpacity>
+        <Image source={require("../assets/Logo.png")} style={styles.logo} />
+        <View style={styles.headerIcons}>
+          <TouchableOpacity>
+            <Image
+              source={require("../assets/Search.png")}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
+            <Image
+              source={require("../assets/shoppingBag.png")}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
         </View>
       </View>
+      <Text style={styles.storyText}>OUR STORY</Text>
+
       <FlatList
         data={products}
         keyExtractor={(item) => item.id.toString()}
@@ -97,105 +89,100 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         )}
       />
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Store")}
+        style={styles.footer1}
+      >
+        <Image source={shoppingBag} style={styles.img} />
+        <Text style={styles.check}>VIEW ITEMS IN BASKET</Text>
+      </TouchableOpacity>
     </View>
   );
 };
-
-export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
   },
-
   header: {
     flexDirection: "row",
-    paddingTop: 20,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 20,
   },
-  headerimg: {
+  icon: {
+    width: 24,
+    height: 24,
+    marginEnd: 10,
+  },
+  logo: {},
+  headerIcons: {
     flexDirection: "row",
+    justifyContent: "space-between",
+    width: 50,
   },
-  headerimg1: {
-    left: 270,
-  },
-  headerimg2: {
-    left: 290,
-  },
-  headerimg3: {
-    right: 30,
-  },
-  headerimg4: {
-    left: 60,
-  },
-  img: {
-    backgroundColor: "#f5f5f5",
-    height: 30,
-    width: 30,
-    borderRadius: 30,
-    left: 155,
-  },
-  img0: {
-    backgroundColor: "#f5f5f5",
-    height: 30,
-    width: 30,
-    borderRadius: 30,
-    left: 140,
-  },
-  img1: {
-    left: 5,
-    top: 5,
-  },
-  img2: {
-    left: 5,
-    top: 5,
-  },
-
-  font: {
+  storyText: {
     fontSize: 24,
-    fontWeight: "bold",
-    left: 20,
+    fontWeight: "condensed",
+    marginLeft: 10,
+    marginBottom: 10,
     fontFamily: "didot",
   },
-
   productContainer: {
+    flex: 1,
     margin: 10,
-    flexDirection: "row",
-    margin: 10,
+    alignItems: "center",
     borderColor: "#ddd",
-    borderWidth: 2,
-    borderRadius: 10,
-    justifyContent: "space-around",
+
+    overflow: "hidden",
   },
   productImage: {
     width: "100%",
-    height: 200,
+    height: 150,
     resizeMode: "contain",
-    right: 250,
   },
   productTitle: {
-    fontSize: 10,
-
+    fontSize: 15,
+    fontWeight: "condensed",
     marginTop: 10,
+    left: 0,
     fontFamily: "didot",
-    left: 20,
   },
   productPrice: {
-    fontSize: 10,
+    fontSize: 16,
     color: "#e60000",
     marginVertical: 5,
-    right: 150,
+    left: -30,
     fontFamily: "didot",
-    top: 60,
   },
   addButton: {
-    width: 30,
-    height: 30,
-    marginBottom: 10,
-    top: -10,
+    top: -20,
     left: 60,
   },
-  addbutton: {},
+  footer: {
+    flexDirection: "row",
+    paddingTop: 650,
+  },
+  img: {
+    tintColor: "white",
+    left: 100,
+    top: 20,
+  },
+  check: {
+    fontFamily: "didot",
+    color: "white",
+    left: 130,
+  },
+  footer1: {
+    paddingBottom: 40,
+    backgroundColor: "black",
+    height: 70,
+    width: 400,
+    borderRadius: 20,
+    marginBottom: 1,
+    right: 20,
+  },
 });
+
+export default Blog;
